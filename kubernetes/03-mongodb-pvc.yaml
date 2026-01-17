@@ -3,9 +3,12 @@ kind: PersistentVolumeClaim
 metadata:
   name: mongodb-pvc
   namespace: easyshop
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=false
 spec:
   accessModes:
     - ReadWriteOnce
+  storageClassName: standard
   resources:
     requests:
       storage: 5Gi

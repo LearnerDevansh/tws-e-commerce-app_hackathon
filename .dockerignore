@@ -28,3 +28,11 @@ README.md
 *.md
 .vscode
 .idea
+
+# Infrastructure files
+terraform
+kubernetes
+helm-values
+scripts/Dockerfile.migration
+Jenkinsfile
+JENKINS.md

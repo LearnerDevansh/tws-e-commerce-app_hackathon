@@ -35,13 +35,26 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: easyshop
-    ports:
-      - "3000:3000"
+    expose:
+      - "3000"
     env_file:
       - .env.local
     depends_on:
       migration:
         condition: service_completed_successfully
+    networks:
+      - easyshop-network
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:alpine
+    container_name: easyshop-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - app
     networks:
       - easyshop-network
     restart: unless-stopped

@@ -1,0 +1,44 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: easyshop-project
+  namespace: argocd
+spec:
+  description: EasyShop E-commerce Application Project
+  
+  sourceRepos:
+    - 'https://github.com/LearnerDevansh/tws-e-commerce-app_hackathon.git'
+  
+  destinations:
+    - namespace: easyshop
+      server: https://kubernetes.default.svc
+    - namespace: argocd
+      server: https://kubernetes.default.svc
+  
+  clusterResourceWhitelist:
+    - group: ''
+      kind: Namespace
+    - group: 'rbac.authorization.k8s.io'
+      kind: ClusterRole
+    - group: 'rbac.authorization.k8s.io'
+      kind: ClusterRoleBinding
+  
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  
+  roles:
+    - name: developer
+      description: Developer role with read-only access
+      policies:
+        - p, proj:easyshop-project:developer, applications, get, easyshop-project/*, allow
+        - p, proj:easyshop-project:developer, applications, sync, easyshop-project/*, allow
+      groups:
+        - developers
+    
+    - name: admin
+      description: Admin role with full access
+      policies:
+        - p, proj:easyshop-project:admin, applications, *, easyshop-project/*, allow
+      groups:
+        - admins
