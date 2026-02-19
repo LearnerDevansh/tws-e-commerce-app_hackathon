@@ -9,7 +9,7 @@ spec:
     storage: 5Gi
   accessModes:
     - ReadWriteOnce
-  storageClassName: standard
+  storageClassName: ""
   hostPath:
     path: /data/mongodb
     type: DirectoryOrCreate
