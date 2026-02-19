@@ -8,7 +8,7 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  project: default
+  project: easyshop-project
   
   source:
     repoURL: https://github.com/LearnerDevansh/tws-e-commerce-app_hackathon.git
