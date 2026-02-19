@@ -9,6 +9,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   storageClassName: standard
+  volumeName: mongodb-pv
   resources:
     requests:
       storage: 4Gi 
