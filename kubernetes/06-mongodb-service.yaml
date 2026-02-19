@@ -1,13 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    argocd.argoproj.io/sync-wave: "3"
-  name: mongodb-service
+  name: mongodb
   namespace: easyshop
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
-  ports:
-    - port: 27017
-      targetPort: 27017
   selector:
     app: mongodb
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
+  type: ClusterIP
